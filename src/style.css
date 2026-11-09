@@ -11,3 +11,23 @@ h1 { font-size: 1.4rem; }
 .session ul { margin: 0; padding-left: 18px; }
 .session li { margin: 4px 0; }
 .meta { color: var(--quiet); font-size: .85rem; }
+h3 { font-size: 1rem; margin: 18px 0 8px; }
+.btn { font: inherit; font-size: 1rem; border: 0; border-radius: 10px; padding: 14px 16px; min-height: 48px; color: var(--ink); background: var(--card); cursor: pointer; }
+.btn.primary { display: block; width: 100%; margin: 16px 0; background: var(--push); font-weight: 600; }
+.btn.ghost { border: 2px solid var(--push); background: transparent; }
+.btn.ghost.pull { border-color: var(--pull); }
+.btn.ghost.legs { border-color: var(--legs); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row .btn { flex: 1; }
+.exercise { border-top: 1px solid #2a313a; padding-top: 6px; }
+.exercise h3 { margin: 8px 0 2px; }
+.exercise > p { margin: 0 0 8px; }
+.set { display: grid; grid-template-columns: 22px 1fr 1fr 64px 56px; gap: 8px; align-items: center; margin: 6px 0; }
+.set .num { color: var(--quiet); text-align: center; }
+.set input[type=text] { width: 100%; min-width: 0; font: inherit; font-size: 1.15rem; padding: 10px; border-radius: 8px; border: 1px solid #333b46; background: var(--bg); color: var(--ink); text-align: center; }
+.set .fail { font-size: .8rem; color: var(--quiet); display: flex; align-items: center; gap: 4px; }
+.set .fail input { width: 20px; height: 20px; }
+.set .ok { padding: 10px 0; min-height: 44px; background: #2a313a; }
+.set.done .ok { background: var(--legs); }
+.set.done input[type=text] { border-color: var(--legs); }
+.set.error input[type=text] { border-color: #e5484d; }

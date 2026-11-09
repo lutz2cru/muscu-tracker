@@ -19,9 +19,8 @@ Application web mobile pour suivre un programme de musculation Push/Pull (+ bloc
 `python -m http.server 8000` à la racine, puis ouvrir http://localhost:8000 (le `fetch` de program.json ne marche pas en ouvrant le fichier directement).
 
 ## État actuel
-- Étape 1 faite (program.json).
-- Étape 2 : squelette qui affiche la séance du jour, à valider.
-- Prochaine étape : 3, saisie et sauvegarde d'une série.
+- Étapes 1 à 3 faites : accueil (séance du jour + autre séance), saisie des séries sauvegardée dans localStorage (clé `muscu.v1`, voir `src/storage.js`).
+- Prochaine étape : 4, chrono de repos 2 min.
 
 ## Idées à ne pas oublier
 - Chrono de repos : prévoir un son et la vibration ; vérifier le comportement écran verrouillé.
