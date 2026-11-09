@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "rest_seconds": 120,
+  "exercises": {
+    "db_bench":      { "name": "Développé couché haltères", "type": "heavy", "cue": "Omoplates serrées, descente en 2 s." },
+    "smith_incline": { "name": "Développé incliné Smith", "type": "heavy", "cue": "Banc à environ 30°, barre vers le haut de la poitrine." },
+    "military":      { "name": "Développé militaire", "type": "heavy", "cue": "Ventre gainé, sans cambrer le bas du dos." },
+    "chest_press":   { "name": "Chest press", "type": "heavy", "cue": "Dos collé au dossier, sans verrouiller les coudes." },
+    "cable_biceps":  { "name": "Cable biceps", "type": "isolation", "cue": "Coudes fixes le long du corps." },
+    "lateral_raise": { "name": "Élévations latérales poulie", "type": "isolation", "cue": "Charge légère, montée jusqu'à hauteur d'épaule." },
+    "lat_pulldown":  { "name": "Tirage vertical poulie", "type": "heavy", "cue": "Tire vers le haut de la poitrine, coudes vers les hanches." },
+    "rowing":        { "name": "Rowing machine", "type": "heavy", "cue": "Serre les omoplates en fin de mouvement, pause 1 s." },
+    "pec_fly":       { "name": "Pec fly", "type": "isolation", "cue": "Amplitude contrôlée, sans forcer sur l'épaule à l'étirement." },
+    "reverse_fly":   { "name": "Reverse fly", "type": "isolation", "cue": "Coudes légèrement fléchis, charge modérée." },
+    "triceps_pushdown": { "name": "Triceps pushdown", "type": "isolation", "cue": "Coudes fixes, extension complète en bas." },
+    "external_rotation": { "name": "Rotation externe d'épaule (poulie)", "type": "isolation", "cue": "Coude collé au corps, charge très légère." },
+    "leg_press":     { "name": "Presse", "type": "heavy", "cue": "Pieds à largeur d'épaules, bassin collé au dossier." },
+    "leg_curl":      { "name": "Leg curl", "type": "heavy", "cue": "Descente lente, sans décoller les hanches." },
+    "adductors":     { "name": "Adducteurs", "type": "isolation", "cue": "Mouvement contrôlé, sans élan." },
+    "abductors":     { "name": "Abducteurs", "type": "isolation", "cue": "Dos collé, sans élan." }
+  },
+  "sessions": {
+    "push": {
+      "name": "Push",
+      "days": [1, 4],
+      "items": [
+        { "exercise": "db_bench", "sets": 3, "reps": "8-10", "only_days": [1] },
+        { "exercise": "smith_incline", "sets": 3, "reps": "8-10", "only_days": [4] },
+        { "exercise": "military", "sets": 3, "reps": "8-10" },
+        { "exercise": "chest_press", "sets": 3, "reps": "8-10" },
+        { "exercise": "cable_biceps", "sets": 3, "reps": "8-10" },
+        { "exercise": "lateral_raise", "sets": 3, "reps": "15", "all_sets_same": true }
+      ]
+    },
+    "pull": {
+      "name": "Pull",
+      "days": [3, 0],
+      "items": [
+        { "exercise": "lat_pulldown", "sets": 3, "reps": "8-10" },
+        { "exercise": "rowing", "sets": 3, "reps": "8-10" },
+        { "exercise": "pec_fly", "sets": 3, "reps": "8-10" },
+        { "exercise": "reverse_fly", "sets": 3, "reps": "8-10" },
+        { "exercise": "triceps_pushdown", "sets": 3, "reps": "8-10" },
+        { "exercise": "external_rotation", "sets": 2, "reps": "12-15", "all_sets_same": true }
+      ]
+    },
+    "legs": {
+      "name": "Bloc jambes",
+      "days": [3],
+      "after": "pull",
+      "items": [
+        { "exercise": "leg_press", "sets": 3, "reps": "8-10" },
+        { "exercise": "leg_curl", "sets": 3, "reps": "8-10" },
+        { "exercise": "adductors", "sets": 3, "reps": "8-10" },
+        { "exercise": "abductors", "sets": 3, "reps": "8-10" }
+      ]
+    }
+  },
+  "rules": {
+    "first_set": "8-10 reps",
+    "later_sets_heavy": "stop à 1-2 reps de l'échec",
+    "later_sets_isolation": "à l'échec",
+    "progression": "Si 10 reps sur la série 1 et au moins 8 sur les suivantes: +2 à 2,5 kg",
+    "deload": "Toutes les 6 à 8 semaines: environ 60 % des charges, sans échec"
+  },
+  "notes": "days: 0=dimanche ... 6=samedi (comme JavaScript getDay). Handball: mardi, vendredi, samedi."
+}

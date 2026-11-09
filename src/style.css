@@ -1,0 +1,13 @@
+:root { color-scheme: dark; --bg:#111418; --card:#1b2027; --ink:#eef1f5; --quiet:#9aa3af; --push:#2f6fde; --pull:#e8643c; --legs:#1fa67a; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+main { max-width: 520px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 1.4rem; }
+#today { color: var(--quiet); }
+.session { background: var(--card); border-radius: 12px; padding: 12px 14px; margin: 12px 0; border-left: 6px solid var(--push); }
+.session.pull { border-color: var(--pull); }
+.session.legs { border-color: var(--legs); }
+.session h2 { margin: 0 0 8px; font-size: 1.1rem; }
+.session ul { margin: 0; padding-left: 18px; }
+.session li { margin: 4px 0; }
+.meta { color: var(--quiet); font-size: .85rem; }
