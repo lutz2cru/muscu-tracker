@@ -59,3 +59,15 @@ export function finishWorkout() {
   db.current = null;
   save(db);
 }
+
+// Séries d'un exercice lors de la dernière séance (hors séance en cours) où il a été fait.
+export function lastSetsFor(exercise, excludeId) {
+  const db = load();
+  for (let i = db.workouts.length - 1; i >= 0; i--) {
+    const w = db.workouts[i];
+    if (w.id === excludeId) continue;
+    const sets = w.sets.filter(s => s.exercise === exercise).sort((a, b) => a.number - b.number);
+    if (sets.length) return { date: w.date, sets };
+  }
+  return null;
+}

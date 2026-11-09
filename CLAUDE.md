@@ -21,9 +21,10 @@ Application web mobile pour suivre un programme de musculation Push/Pull (+ bloc
 ## État actuel
 - Étapes 1 à 3 faites : accueil (séance du jour + autre séance), saisie des séries sauvegardée dans localStorage (clé `muscu.v1`, voir `src/storage.js`).
 - Étape 4 faite : chrono de repos (`src/timer.js`), lancé à chaque série validée. Reste à confirmer sur un vrai téléphone que les bips sonnent écran verrouillé.
-- Prochaine étape : 5, rappel de la dernière séance + message de progression.
+- Étape 5 faite : rappel de la dernière séance par exercice (charge préremplie) et conseil de progression (`src/progress.js`).
+- Prochaine étape : 6, utilisation réelle pendant une semaine et liste des frictions. Le MVP est complet.
 
 ## Idées à ne pas oublier
 - Chrono écran verrouillé : un fichier audio (silence + bips) est lancé au clic, car le JS est suspendu écran verrouillé. La vibration ne marche que sur Android (pas sur iPhone).
 - Wake Lock (écran gardé allumé) exige HTTPS ou localhost : il ne marche pas en testant sur le téléphone via http://IP-du-PC:8000 ; il marchera sur GitHub Pages.
-- Progression : 10 reps en série 1 et au moins 8 sur les suivantes => proposer +2 à 2,5 kg.
+- Progression généralisée à la fourchette de reps : haut de la fourchette en série 1, au moins le bas ensuite (8-10 => 10 puis >= 8 ; cible fixe 15 => 15 partout).

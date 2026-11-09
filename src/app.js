@@ -1,10 +1,12 @@
 // Accueil (séance du jour ou autre séance) et séance en cours avec saisie des séries.
-import { currentWorkout, startWorkout, saveSet, finishWorkout } from './storage.js';
+import { currentWorkout, startWorkout, saveSet, finishWorkout, lastSetsFor } from './storage.js';
+import { advice, kg } from './progress.js';
 import { initTimer, startTimer, addTime, stopTimer, keepAwake, releaseAwake } from './timer.js';
 
 const DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
 const app = document.getElementById('app');
 let program;
+let itemsByEx = {}; // exercice -> item de la séance en cours
 
 async function loadProgram() {
   const res = await fetch('data/program.json');
@@ -47,9 +49,10 @@ function renderHome() {
     <div class="row">${others}</div>`;
 }
 
-function setRow(item, n, saved, prev) {
+function setRow(item, n, saved, prev, lastSet) {
   const v = saved || {};
-  const weight = v.weight ?? prev?.weight ?? '';
+  // Charge préremplie : celle de la même série la dernière fois, sinon celle de la série précédente.
+  const weight = v.weight ?? lastSet?.weight ?? prev?.weight ?? '';
   const reps = v.reps ?? '';
   const failureBox = n > 1
     ? `<label class="fail"><input type="checkbox" data-f ${v.failure ? 'checked' : ''}> échec</label>` : '<span></span>';
@@ -63,24 +66,54 @@ function setRow(item, n, saved, prev) {
     </div>`;
 }
 
+const fmtDate = iso => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
+};
+
+// Rappel de la dernière séance et, si elle a rempli l'objectif, la charge conseillée.
+function lastBlock(item, last) {
+  if (!last) return '<p class="last">Première fois : choisis une charge pour faire le bas de la fourchette.</p>';
+  const list = last.sets.map(s => `${kg(s.weight)} × ${s.reps}${s.failure ? ' (échec)' : ''}`).join(' · ');
+  const a = advice(item, last.sets);
+  const up = a?.status === 'ready'
+    ? `<p class="advice ready">⬆ Objectif atteint la dernière fois : passe à ${kg(last.sets[0].weight + 2)} – ${kg(last.sets[0].weight + 2.5)} kg.</p>` : '';
+  return `<p class="last">Dernière fois (${fmtDate(last.date)}) : ${list}</p>${up}`;
+}
+
+// Conseil en direct pendant la séance, recalculé à chaque série validée.
+function updateAdvice(w, exercise) {
+  const el = app.querySelector(`.exercise[data-ex="${exercise}"] > .advice:last-child`);
+  if (!el) return;
+  const a = advice(itemsByEx[exercise], w.sets.filter(s => s.exercise === exercise));
+  el.hidden = !a;
+  el.className = `advice ${a?.status === 'ready' ? 'ready' : ''}`;
+  el.textContent = a ? a.text : '';
+}
+
 function renderWorkout(w) {
+  itemsByEx = {};
   const blocks = w.sessions.map(k => {
     const exercises = itemsFor(k, w.day).map(item => {
       const ex = program.exercises[item.exercise];
+      itemsByEx[item.exercise] = item;
+      const last = lastSetsFor(item.exercise, w.id);
       let prev = null;
       const rows = [];
       for (let n = 1; n <= item.sets; n++) {
         const saved = w.sets.find(s => s.exercise === item.exercise && s.number === n);
-        rows.push(setRow(item, n, saved, prev));
+        rows.push(setRow(item, n, saved, prev, last?.sets.find(s => s.number === n)));
         prev = saved || prev;
       }
-      return `<article class="exercise"><h3>${esc(ex.name)} <span class="meta">${item.sets} × ${item.reps}</span></h3>
-        <p class="meta">${esc(ex.cue)}</p>${rows.join('')}</article>`;
+      return `<article class="exercise" data-ex="${item.exercise}"><h3>${esc(ex.name)} <span class="meta">${item.sets} × ${item.reps}</span></h3>
+        <p class="meta">${esc(ex.cue)}</p>${lastBlock(item, last)}${rows.join('')}
+        <p class="advice" hidden></p></article>`;
     }).join('');
     return `<section class="session ${k}"><h2>${esc(program.sessions[k].name)}</h2>${exercises}</section>`;
   }).join('');
   app.innerHTML = `<h1>Séance en cours</h1>${blocks}
     <button class="btn primary" data-finish>Terminer la séance</button>`;
+  Object.keys(itemsByEx).forEach(ex => updateAdvice(w, ex));
 }
 
 function render() {
@@ -136,6 +169,7 @@ app.addEventListener('click', e => {
     }
     const failure = !!row.querySelector('[data-f]')?.checked;
     saveSet(currentWorkout().id, { exercise: row.dataset.ex, number: Number(row.dataset.n), weight, reps, failure });
+    updateAdvice(currentWorkout(), row.dataset.ex);
     row.classList.add('done');
     btn.textContent = '✓';
     startTimer(program.rest_seconds);

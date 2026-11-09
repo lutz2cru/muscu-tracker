@@ -37,3 +37,6 @@ main { padding-bottom: 96px; }
 #timer .time { flex: 1; font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
 #timer.over { background: var(--legs); border-color: var(--legs); }
 #timer .btn { background: #343c47; }
+.last { margin: 0 0 6px; font-size: .85rem; color: var(--ink); opacity: .8; }
+.advice { margin: 6px 0; padding: 8px 10px; border-radius: 8px; font-size: .9rem; background: #2a313a; }
+.advice.ready { background: rgba(31, 166, 122, .2); border: 1px solid var(--legs); }
