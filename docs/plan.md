@@ -45,7 +45,7 @@ HTML/CSS/JS (modules ES, sans framework au départ), IndexedDB ou localStorage, 
 1. Cadrage : dépôt Git + program.json (3 séances et exercices). [FAIT]
 2. Squelette : accueil avec la séance du jour. [FAIT]
 3. Saisie d'une série, sauvegarde locale (survit au rechargement). [FAIT]
-4. Chrono de repos 2 min (sonne écran verrouillé compris).
+4. Chrono de repos 2 min (sonne écran verrouillé compris). [FAIT, écran verrouillé à confirmer sur téléphone]
 5. Rappel dernière séance + message de progression (10 reps en série 1 déclenche le conseil).
 6. Utilisation réelle une semaine, liste des frictions.
 7. V2 : historique, courbes, export CSV, PWA hors ligne.

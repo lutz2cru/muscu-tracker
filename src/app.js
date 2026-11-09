@@ -1,5 +1,6 @@
 // Accueil (séance du jour ou autre séance) et séance en cours avec saisie des séries.
 import { currentWorkout, startWorkout, saveSet, finishWorkout } from './storage.js';
+import { initTimer, startTimer, addTime, stopTimer, keepAwake, releaseAwake } from './timer.js';
 
 const DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
 const app = document.getElementById('app');
@@ -84,8 +85,27 @@ function renderWorkout(w) {
 
 function render() {
   const w = currentWorkout();
-  w ? renderWorkout(w) : renderHome();
+  if (w) { renderWorkout(w); keepAwake(); } else renderHome();
 }
+
+// Barre du chrono, fixée en bas de l'écran.
+const bar = document.getElementById('timer');
+let hideTimeout = null;
+const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+
+function renderTimer(r) {
+  clearTimeout(hideTimeout);
+  if (r === null) { bar.hidden = true; return; }
+  bar.hidden = false;
+  bar.classList.toggle('over', r === 0);
+  bar.querySelector('.time').textContent = r === 0 ? 'Repos terminé !' : `Repos ${fmt(r)}`;
+  if (r === 0) hideTimeout = setTimeout(() => { bar.hidden = true; }, 6000);
+}
+
+bar.addEventListener('click', e => {
+  if (e.target.closest('[data-more]')) addTime(30);
+  if (e.target.closest('[data-skip]')) stopTimer();
+});
 
 app.addEventListener('click', e => {
   const start = e.target.closest('[data-start]');
@@ -98,6 +118,8 @@ app.addEventListener('click', e => {
   if (e.target.closest('[data-finish]')) {
     if (!confirm('Terminer la séance ?')) return;
     finishWorkout();
+    stopTimer();
+    releaseAwake();
     render();
     window.scrollTo(0, 0);
     return;
@@ -116,6 +138,7 @@ app.addEventListener('click', e => {
     saveSet(currentWorkout().id, { exercise: row.dataset.ex, number: Number(row.dataset.n), weight, reps, failure });
     row.classList.add('done');
     btn.textContent = '✓';
+    startTimer(program.rest_seconds);
     // Préremplit la charge de la série suivante si elle est vide.
     const next = row.nextElementSibling;
     if (next?.classList.contains('set')) {
@@ -135,6 +158,7 @@ app.addEventListener('input', e => {
 async function main() {
   try {
     program = await loadProgram();
+    initTimer(renderTimer);
     render();
   } catch (err) {
     app.innerHTML = '<p>Impossible de charger le programme. Lance le site avec <code>python -m http.server 8000</code>.</p>';
