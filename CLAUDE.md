@@ -22,7 +22,8 @@ Application web mobile pour suivre un programme de musculation Push/Pull (+ bloc
 - Étapes 1 à 3 faites : accueil (séance du jour + autre séance), saisie des séries sauvegardée dans localStorage (clé `muscu.v1`, voir `src/storage.js`).
 - Étape 4 faite : chrono de repos (`src/timer.js`), lancé à chaque série validée. Reste à confirmer sur un vrai téléphone que les bips sonnent écran verrouillé.
 - Étape 5 faite : rappel de la dernière séance par exercice (charge préremplie) et conseil de progression (`src/progress.js`).
-- Prochaine étape : 6, utilisation réelle pendant une semaine et liste des frictions. Le MVP est complet.
+- En ligne : https://lutz2cru.github.io/muscu-tracker/ (GitHub Pages, publié à chaque push sur `main`).
+- Prochaines étapes : 6, utilisation réelle pendant une semaine ; retravailler l'interface pour qu'elle soit agréable pour d'autres utilisateurs. Le MVP est complet.
 
 ## Idées à ne pas oublier
 - Chrono écran verrouillé : un fichier audio (silence + bips) est lancé au clic, car le JS est suspendu écran verrouillé. La vibration ne marche que sur Android (pas sur iPhone).
