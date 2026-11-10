@@ -207,20 +207,20 @@ function render() {
 
 // Barre du chrono, fixée en bas de l'écran.
 const bar = document.getElementById('timer');
-let hideTimeout = null;
 let timerTotal = 0;
 const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
+// r : secondes restantes, négatif quand le repos est dépassé (affiché en +m:ss).
 function renderTimer(r) {
-  clearTimeout(hideTimeout);
   if (r === null) { bar.hidden = true; return; }
   bar.hidden = false;
   timerTotal = Math.max(timerTotal, r, program.rest_seconds);
-  bar.classList.toggle('over', r === 0);
-  bar.querySelector('.t-label').textContent = r === 0 ? 'Repos terminé' : 'Repos';
-  bar.querySelector('.time').textContent = r === 0 ? 'Go !' : fmt(r);
-  bar.querySelector('.t-fill').style.width = `${100 * r / timerTotal}%`;
-  if (r === 0) hideTimeout = setTimeout(() => { bar.hidden = true; }, 6000);
+  const over = r <= 0;
+  bar.classList.toggle('over', over);
+  bar.querySelector('.t-label').textContent = over ? 'Repos terminé · Go !' : 'Repos';
+  bar.querySelector('.time').textContent = over ? `+${fmt(-r)}` : fmt(r);
+  bar.querySelector('.t-fill').style.width = `${100 * Math.max(0, r) / timerTotal}%`;
+  bar.querySelector('[data-skip]').textContent = over ? 'OK' : 'Passer';
 }
 
 function restart(seconds) {
