@@ -1,7 +1,7 @@
 // Accueil (séance du jour ou autre séance) et séance en cours avec saisie des séries.
 import { currentWorkout, startWorkout, saveSet, finishWorkout, lastSetsFor } from './storage.js';
 import { advice, kg } from './progress.js';
-import { initTimer, startTimer, addTime, stopTimer, keepAwake, releaseAwake } from './timer.js';
+import { keepAwake, releaseAwake } from './awake.js';
 
 const DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
 const app = document.getElementById('app');
@@ -68,7 +68,7 @@ function renderHome() {
       <section class="hero ${todays[0]}" style="${c2}">
         <p class="label">Séance du jour</p>
         <h2>${todays.map(sessionName).join(' + ')}</h2>
-        <p class="summary meta">${nbEx} exercices · ${nbSets} séries · repos ${program.rest_seconds / 60} min</p>
+        <p class="summary meta">${nbEx} exercices · ${nbSets} séries</p>
         <ul class="ex-list">${list}</ul>
         <button class="btn btn-primary" data-start="${todays.join(',')}">Commencer la séance</button>
       </section>`;
@@ -205,34 +205,6 @@ function render() {
   if (w) { renderWorkout(w); keepAwake(); } else renderHome();
 }
 
-// Barre du chrono, fixée en bas de l'écran.
-const bar = document.getElementById('timer');
-let timerTotal = 0;
-const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-
-// r : secondes restantes, négatif quand le repos est dépassé (affiché en +m:ss).
-function renderTimer(r) {
-  if (r === null) { bar.hidden = true; return; }
-  bar.hidden = false;
-  timerTotal = Math.max(timerTotal, r, program.rest_seconds);
-  const over = r <= 0;
-  bar.classList.toggle('over', over);
-  bar.querySelector('.t-label').textContent = over ? 'Repos terminé · Go !' : 'Repos';
-  bar.querySelector('.time').textContent = over ? `+${fmt(-r)}` : fmt(r);
-  bar.querySelector('.t-fill').style.width = `${100 * Math.max(0, r) / timerTotal}%`;
-  bar.querySelector('[data-skip]').textContent = over ? 'OK' : 'Passer';
-}
-
-function restart(seconds) {
-  timerTotal = seconds;
-  startTimer(seconds);
-}
-
-bar.addEventListener('click', e => {
-  if (e.target.closest('[data-more]')) { timerTotal += 30; addTime(30); }
-  if (e.target.closest('[data-skip]')) stopTimer();
-});
-
 app.addEventListener('click', e => {
   const start = e.target.closest('[data-start]');
   if (start) {
@@ -244,7 +216,6 @@ app.addEventListener('click', e => {
   if (e.target.closest('[data-finish]')) {
     if (!confirm('Terminer la séance ?')) return;
     finishWorkout();
-    stopTimer();
     releaseAwake();
     render();
     window.scrollTo(0, 0);
@@ -267,7 +238,6 @@ app.addEventListener('click', e => {
     refreshStatus(w);
     row.classList.add('done');
     btn.textContent = '✓';
-    restart(program.rest_seconds);
     // Préremplit la charge de la série suivante si elle est vide.
     const card = row.closest('.exercise');
     if (card.classList.contains('complete')) {
@@ -293,7 +263,6 @@ app.addEventListener('input', e => {
 async function main() {
   try {
     program = await loadProgram();
-    initTimer(renderTimer);
     render();
   } catch (err) {
     app.innerHTML = '<p>Impossible de charger le programme. Lance le site avec <code>python -m http.server 8000</code>.</p>';

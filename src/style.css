@@ -22,7 +22,7 @@ body {
   background: var(--bg); color: var(--ink); line-height: 1.4;
   padding-top: env(safe-area-inset-top);
 }
-main { max-width: 560px; margin: 0 auto; padding: 0 16px 120px; }
+main { max-width: 560px; margin: 0 auto; padding: 0 16px calc(32px + env(safe-area-inset-bottom)); }
 button { font: inherit; color: inherit; cursor: pointer; }
 .meta { color: var(--muted); font-size: .85rem; }
 
@@ -160,25 +160,5 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 
 .finish { margin-top: 22px; }
-
-/* ---------- Chrono ---------- */
-#timer {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-  padding: 0 16px calc(12px + env(safe-area-inset-bottom));
-  background: rgba(21, 26, 33, .96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid var(--border);
-}
-#timer[hidden] { display: none; }
-#timer .t-track { height: 4px; margin: 0 -16px 10px; background: var(--surface-2); }
-#timer .t-fill { height: 100%; width: 100%; background: var(--push); transition: width .25s linear; }
-#timer .t-row { display: flex; align-items: center; gap: 8px; max-width: 528px; margin: 0 auto; }
-#timer .t-txt { flex: 1; }
-#timer .t-label { display: block; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-#timer .time { font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
-#timer .btn { min-height: 44px; padding: 10px 14px; }
-#timer.over { background: var(--ok); color: #06261a; border-color: var(--ok); }
-#timer.over .t-label { color: #06261a; }
-#timer.over .btn { background: rgba(0, 0, 0, .15); }
-#timer.over .t-track { visibility: hidden; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

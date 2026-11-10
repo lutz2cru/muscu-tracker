@@ -20,12 +20,12 @@ Application web mobile pour suivre un programme de musculation Push/Pull (+ bloc
 
 ## État actuel
 - Étapes 1 à 3 faites : accueil (séance du jour + autre séance), saisie des séries sauvegardée dans localStorage (clé `muscu.v1`, voir `src/storage.js`).
-- Étape 4 faite : chrono de repos (`src/timer.js`), lancé à chaque série validée. Mode « musique » : bips Web Audio qui se mélangent à Spotify, écran gardé allumé, dépassement affiché (+m:ss). À confirmer sur iPhone : bips audibles par-dessus la musique, et en mode silencieux.
+- Étape 4 mise de côté : le chrono de repos a été retiré (trop compliqué avec la musique sur iPhone), à reprendre plus tard. Le code est dans l'historique git (commit 4e45e99, `src/timer.js`). L'écran reste allumé pendant une séance (`src/awake.js`).
 - Étape 5 faite : rappel de la dernière séance par exercice (charge préremplie) et conseil de progression (`src/progress.js`).
 - En ligne : https://lutz2cru.github.io/muscu-tracker/ (GitHub Pages, publié à chaque push sur `main`).
 - Prochaines étapes : 6, utilisation réelle pendant une semaine ; retravailler l'interface pour qu'elle soit agréable pour d'autres utilisateurs. Le MVP est complet.
 
 ## Idées à ne pas oublier
-- Chrono et musique : sur iPhone, une page web ne peut pas sonner écran verrouillé sans couper la musique (l'ancien fichier audio silence + bips mettait Spotify en pause sans le relancer). On a choisi le mode « musique » (écran allumé). Piste si besoin de verrouiller : un Raccourci iOS qui lance le minuteur de l'Horloge. La vibration ne marche que sur Android.
+- Chrono et musique : sur iPhone, une page web ne peut pas sonner écran verrouillé sans couper la musique (l'ancien fichier audio silence + bips mettait Spotify en pause sans le relancer). Dernière version testée : mode « musique » (bips Web Audio par-dessus Spotify, écran allumé, dépassement affiché). Piste si besoin de verrouiller : un Raccourci iOS qui lance le minuteur de l'Horloge. La vibration ne marche que sur Android.
 - Wake Lock (écran gardé allumé) exige HTTPS ou localhost : il ne marche pas en testant sur le téléphone via http://IP-du-PC:8000 ; il marchera sur GitHub Pages.
 - Progression généralisée à la fourchette de reps : haut de la fourchette en série 1, au moins le bas ensuite (8-10 => 10 puis >= 8 ; cible fixe 15 => 15 partout).
