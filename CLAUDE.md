@@ -22,6 +22,7 @@ Application web mobile pour suivre un programme de musculation Push/Pull (+ bloc
 - Étapes 1 à 3 faites : accueil (séance du jour + autre séance), saisie des séries sauvegardée dans localStorage (clé `muscu.v1`, voir `src/storage.js`).
 - Étape 4 mise de côté : le chrono de repos a été retiré (trop compliqué avec la musique sur iPhone), à reprendre plus tard. Le code est dans l'historique git (commit 4e45e99, `src/timer.js`). L'écran reste allumé pendant une séance (`src/awake.js`).
 - Étape 5 faite : rappel de la dernière séance par exercice (charge préremplie) et conseil de progression (`src/progress.js`).
+- Programme remplacé le 11 nov. 2026 par les séances habituelles de Matthias (Pecs/épaules/triceps, Dos/biceps, jambes le mercredi). Nouveaux identifiants d'exercices : l'historique des anciens exercices reste dans localStorage mais n'est plus affiché.
 - En ligne : https://lutz2cru.github.io/muscu-tracker/ (GitHub Pages, publié à chaque push sur `main`).
 - Prochaines étapes : 6, utilisation réelle pendant une semaine ; retravailler l'interface pour qu'elle soit agréable pour d'autres utilisateurs. Le MVP est complet.
 

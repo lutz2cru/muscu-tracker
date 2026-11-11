@@ -6,17 +6,18 @@ Version de référence : le document en ligne « Plan du projet : application de
 Remplacer le carnet papier : afficher la séance du jour, enregistrer chaque série, dire quand augmenter la charge. Usage sur téléphone, une main, réseau faible.
 
 ## Programme (voir data/program.json)
-- Push : lundi et jeudi
-- Pull : mercredi et dimanche
-- Bloc jambes : mercredi, après le Pull
+Repris des fiches papier de Matthias (Séance 1 et Séance 2), abdos remplacés par un bloc jambes.
+- Pecs, épaules, triceps (push) : lundi et jeudi
+- Dos, biceps (pull) : mercredi et dimanche
+- Bloc jambes : mercredi seulement, après le dos (dimanche = lendemain de match)
 - Handball : mardi, vendredi, samedi (pas de musculation)
+- Ajouts pour le handball : rotation externe d'épaule, face pull, leg curl assis, adducteurs.
 
 ## Règles d'entraînement
-- 3 séries par exercice, repos 2 min.
-- Série 1 : 8 à 10 reps.
-- Séries 2 et 3 : isolation à l'échec ; exercices lourds à 1-2 reps de l'échec.
-- Élévations latérales : 3 × 15. Rotation externe : 2 × 12-15.
-- Progression : 10 reps en série 1 et au moins 8 ensuite => +2 à 2,5 kg.
+- 3 ou 4 séries par exercice (voir program.json), repos 2 min.
+- Fourchette 8-12 reps en général, 12-15 pour élévations latérales, face pull, adducteurs.
+- Séries suivantes : isolation à l'échec ; exercices lourds à 1-2 reps de l'échec.
+- Progression : haut de la fourchette en série 1 et au moins le bas ensuite => +2 à 2,5 kg.
 - Décharge toutes les 6 à 8 semaines (~60 % des charges, sans échec).
 
 ## Versions

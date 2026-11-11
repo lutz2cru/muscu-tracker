@@ -1,47 +1,50 @@
 {
-  "version": 1,
+  "version": 2,
   "rest_seconds": 120,
   "exercises": {
-    "db_bench":      { "name": "Développé couché haltères", "type": "heavy", "cue": "Omoplates serrées, descente en 2 s." },
-    "smith_incline": { "name": "Développé incliné Smith", "type": "heavy", "cue": "Banc à environ 30°, barre vers le haut de la poitrine." },
-    "military":      { "name": "Développé militaire", "type": "heavy", "cue": "Ventre gainé, sans cambrer le bas du dos." },
-    "chest_press":   { "name": "Chest press", "type": "heavy", "cue": "Dos collé au dossier, sans verrouiller les coudes." },
-    "cable_biceps":  { "name": "Cable biceps", "type": "isolation", "cue": "Coudes fixes le long du corps." },
-    "lateral_raise": { "name": "Élévations latérales poulie", "type": "isolation", "cue": "Charge légère, montée jusqu'à hauteur d'épaule." },
-    "lat_pulldown":  { "name": "Tirage vertical poulie", "type": "heavy", "cue": "Tire vers le haut de la poitrine, coudes vers les hanches." },
-    "rowing":        { "name": "Rowing machine", "type": "heavy", "cue": "Serre les omoplates en fin de mouvement, pause 1 s." },
-    "pec_fly":       { "name": "Pec fly", "type": "isolation", "cue": "Amplitude contrôlée, sans forcer sur l'épaule à l'étirement." },
-    "reverse_fly":   { "name": "Reverse fly", "type": "isolation", "cue": "Coudes légèrement fléchis, charge modérée." },
-    "triceps_pushdown": { "name": "Triceps pushdown", "type": "isolation", "cue": "Coudes fixes, extension complète en bas." },
-    "external_rotation": { "name": "Rotation externe d'épaule (poulie)", "type": "isolation", "cue": "Coude collé au corps, charge très légère." },
-    "leg_press":     { "name": "Presse", "type": "heavy", "cue": "Pieds à largeur d'épaules, bassin collé au dossier." },
-    "leg_curl":      { "name": "Leg curl", "type": "heavy", "cue": "Descente lente, sans décoller les hanches." },
-    "adductors":     { "name": "Adducteurs", "type": "isolation", "cue": "Mouvement contrôlé, sans élan." },
-    "abductors":     { "name": "Abducteurs", "type": "isolation", "cue": "Dos collé, sans élan." }
+    "bench_press":       { "name": "Développé couché barre", "type": "heavy", "cue": "Échauffement : 1 série de 10 à la barre à vide. Pieds ancrés au sol, descente retenue." },
+    "cable_fly":         { "name": "Pec fly à la poulie", "type": "isolation", "cue": "Pied fort en avant, bras légèrement fléchis, mains vers le haut des pecs. Retiens la descente." },
+    "db_incline":        { "name": "Développé incliné haltères", "type": "heavy", "cue": "Banc à 30-45°, dos et tête collés. Descente bras à 90°, remontée face au menton." },
+    "db_lateral_raise":  { "name": "Élévations latérales haltères", "type": "isolation", "cue": "Charge légère, buste un peu penché, bras jusqu'à hauteur d'épaule. Jusqu'à l'échec." },
+    "db_shoulder_press": { "name": "Développé épaules haltères assis", "type": "heavy", "cue": "Dos très droit, haltères au niveau des oreilles, pieds ancrés au sol." },
+    "triceps_pushdown":  { "name": "Poulie triceps", "type": "isolation", "cue": "Coudes collés aux côtes pendant tout le mouvement, descente jusqu'à bras presque tendus." },
+    "cable_overhead_ext": { "name": "Overhead extension à la poulie", "type": "isolation", "cue": "Dos à la poulie, corde au-dessus de la tête, coudes fixes. Sans cambrer le bas du dos." },
+    "external_rotation": { "name": "Rotation externe d'épaule (poulie)", "type": "isolation", "cue": "Coude collé au corps, charge très légère. Protège l'épaule du lanceur." },
+    "seated_row":        { "name": "Tirage horizontal", "type": "heavy", "cue": "Échauffement : 1 série légère. Dos très droit, poignée aux pecs, serre le dos en fin de mouvement." },
+    "straight_arm_pulldown": { "name": "Tirage à la poulie bras tendus", "type": "isolation", "cue": "À 1 m de la poulie, buste penché, dos droit. Bras tendus jusqu'aux cuisses." },
+    "lat_pulldown":      { "name": "Tirage vertical", "type": "heavy", "cue": "Mains un peu plus larges que les épaules, barre sous le menton, dos droit. Retiens la remontée." },
+    "face_pull":         { "name": "Face pull à la poulie", "type": "isolation", "cue": "Corde à hauteur du visage, tire vers le front en ouvrant les coudes. Arrière d'épaule." },
+    "db_curl":           { "name": "Curl biceps haltères", "type": "isolation", "cue": "Coudes collés au corps, tourne la paume vers toi en montant." },
+    "cable_curl":        { "name": "Curl à la poulie basse", "type": "isolation", "cue": "À 30 cm de la poulie, coudes collés, remonte aux pecs et retiens la descente." },
+    "leg_press":         { "name": "Presse à cuisses", "type": "heavy", "cue": "Pieds à largeur d'épaules, bassin collé au dossier, sans verrouiller les genoux." },
+    "seated_leg_curl":   { "name": "Leg curl assis", "type": "heavy", "cue": "Genoux alignés sur l'axe de la machine, descente lente." },
+    "adductors":         { "name": "Adducteurs machine", "type": "isolation", "cue": "Mouvement contrôlé, sans élan." }
   },
   "sessions": {
     "push": {
-      "name": "Push",
+      "name": "Pecs, épaules, triceps",
       "days": [1, 4],
       "items": [
-        { "exercise": "db_bench", "sets": 3, "reps": "8-10", "only_days": [1] },
-        { "exercise": "smith_incline", "sets": 3, "reps": "8-10", "only_days": [4] },
-        { "exercise": "military", "sets": 3, "reps": "8-10" },
-        { "exercise": "chest_press", "sets": 3, "reps": "8-10" },
-        { "exercise": "cable_biceps", "sets": 3, "reps": "8-10" },
-        { "exercise": "lateral_raise", "sets": 3, "reps": "15", "all_sets_same": true }
+        { "exercise": "bench_press", "sets": 4, "reps": "8-12" },
+        { "exercise": "cable_fly", "sets": 4, "reps": "8-12" },
+        { "exercise": "db_incline", "sets": 3, "reps": "8-12" },
+        { "exercise": "db_lateral_raise", "sets": 4, "reps": "12-15" },
+        { "exercise": "db_shoulder_press", "sets": 4, "reps": "8-12" },
+        { "exercise": "triceps_pushdown", "sets": 4, "reps": "8-12" },
+        { "exercise": "cable_overhead_ext", "sets": 4, "reps": "8-12" },
+        { "exercise": "external_rotation", "sets": 2, "reps": "15" }
       ]
     },
     "pull": {
-      "name": "Pull",
+      "name": "Dos, biceps",
       "days": [3, 0],
       "items": [
-        { "exercise": "lat_pulldown", "sets": 3, "reps": "8-10" },
-        { "exercise": "rowing", "sets": 3, "reps": "8-10" },
-        { "exercise": "pec_fly", "sets": 3, "reps": "8-10" },
-        { "exercise": "reverse_fly", "sets": 3, "reps": "8-10" },
-        { "exercise": "triceps_pushdown", "sets": 3, "reps": "8-10" },
-        { "exercise": "external_rotation", "sets": 2, "reps": "12-15", "all_sets_same": true }
+        { "exercise": "seated_row", "sets": 3, "reps": "8-12" },
+        { "exercise": "straight_arm_pulldown", "sets": 4, "reps": "8-12" },
+        { "exercise": "lat_pulldown", "sets": 4, "reps": "8-12" },
+        { "exercise": "face_pull", "sets": 3, "reps": "12-15" },
+        { "exercise": "db_curl", "sets": 4, "reps": "8-12" },
+        { "exercise": "cable_curl", "sets": 4, "reps": "8-12" }
       ]
     },
     "legs": {
@@ -49,19 +52,18 @@
       "days": [3],
       "after": "pull",
       "items": [
-        { "exercise": "leg_press", "sets": 3, "reps": "8-10" },
-        { "exercise": "leg_curl", "sets": 3, "reps": "8-10" },
-        { "exercise": "adductors", "sets": 3, "reps": "8-10" },
-        { "exercise": "abductors", "sets": 3, "reps": "8-10" }
+        { "exercise": "leg_press", "sets": 3, "reps": "8-12" },
+        { "exercise": "seated_leg_curl", "sets": 3, "reps": "8-12" },
+        { "exercise": "adductors", "sets": 3, "reps": "12-15" }
       ]
     }
   },
   "rules": {
-    "first_set": "8-10 reps",
+    "first_set": "haut de la fourchette visé (12 pour 8-12)",
     "later_sets_heavy": "stop à 1-2 reps de l'échec",
     "later_sets_isolation": "à l'échec",
-    "progression": "Si 10 reps sur la série 1 et au moins 8 sur les suivantes: +2 à 2,5 kg",
+    "progression": "Haut de la fourchette en série 1 et au moins le bas sur les suivantes : +2 à 2,5 kg",
     "deload": "Toutes les 6 à 8 semaines: environ 60 % des charges, sans échec"
   },
-  "notes": "days: 0=dimanche ... 6=samedi (comme JavaScript getDay). Handball: mardi, vendredi, samedi."
+  "notes": "days: 0=dimanche ... 6=samedi (comme JavaScript getDay). Handball: mardi, vendredi, samedi. Séances reprises des fiches de Matthias (Séance 1 et 2), abdos remplacés par le bloc jambes du mercredi."
 }
